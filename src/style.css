@@ -63,13 +63,13 @@ button {
   transition: margin-left 0.2s;
 
   /* sticky bottom */
-  margin-bottom: -160px;
+  margin-bottom: -120px;
   padding: 25px;
   padding-bottom: 160px;
 }
 
 #footer {
-  height: 160px;
+  height: 120px;
   margin-left: 0px;
   transition: margin-left 0.2s;
   background-color: rgb(239, 239, 239);
@@ -187,15 +187,23 @@ button {
 
 
 .content-header {
-  margin-top: 85px;
+  margin: 85px auto 0;
   width: 100%;
-  text-align: center;
+  max-width: 1300px;
+  height: 25vh;
+  background-image: url(https://connect-assets.prosple.com/cdn/ff/_CGxeh6zNfu7pH5tdr0WJqdRpHOK_DOYxDRQvt3dUBg/1630574292/public/2021-09/Banner-Mercedez%20Benz%20India-1786x642-2021.jpg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: white;
 }
 
 
 
 .content-header p {
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 1px;
 }
 
@@ -231,9 +239,63 @@ button {
 }
 
 
+.result-heading {
+  text-align: center;
+  font-size: 15px;
+}
 
 
 
+/* posts */
+
+.posts-contain {
+  width: 100%;
+  max-width: 1000px;
+  min-height: 300px;
+  margin: auto;
+}
+
+
+.post {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  /* background-color: rgb(245, 242, 239); */
+  box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.29);
+  margin-top: 20px;
+}
+
+.post img {
+  width: 50%;
+  border-radius: 5px;
+}
+
+
+.car-info {
+  width: 50%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.car-info div {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.model {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 18px;
+}
 
 
 
@@ -288,7 +350,25 @@ button {
     .car-logo {
         max-width: 120px;
     }
+
+    .result-heading {
+      font-size: 20px;
+    }
     
+}
+
+
+@media (max-width: 500px) {
+  .post {
+    flex-direction: column;
+  }
+  .post img {
+    width: 100%;
+  }
+
+  .car-info {
+    width: 100%;
+  }
 }
 
 
