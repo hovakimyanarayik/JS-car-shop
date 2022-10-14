@@ -177,6 +177,11 @@ button {
 
 }
 
+.bg-lightred {
+  background-color: rgb(231, 88, 88);
+  color: white;
+}
+
 .sign-in-btn:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -297,7 +302,9 @@ button {
   font-size: 18px;
 }
 
-
+.car-info div button{
+  margin: 15px;
+}
 
 
 @media (min-width: 768px) {

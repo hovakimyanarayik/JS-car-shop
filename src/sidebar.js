@@ -31,3 +31,37 @@ jQuery(function($) {
     $('.js-show-sidedrawer').on('click', showSidedrawer);
     $('.js-hide-sidedrawer').on('click', hideSidedrawer);
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   {
+//     "model": "Nissan",
+//     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUbe3UuX6dN_76ZS_rjrIrvgcYipPp-LTVhg&usqp=CAU",
+//     "price": "15000",
+//     "milage": "10200",
+//     "city": "Abovyan",
+//     "tel": "2143534523",
+//     "year": "2010"
+
+// }
