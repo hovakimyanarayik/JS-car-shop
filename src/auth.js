@@ -1,4 +1,4 @@
-import { createModal, getRegistrationForm, checkButtonAble } from './utility';
+import { createModal, getRegistrationForm, getSignInForm, checkButtonAble } from './utility';
 
 const apiKey = 'AIzaSyDnAYR2omdMpoeeuv2LuoFHoAreSoLA6kA';
 
@@ -20,7 +20,7 @@ export function renderUserPage(token){
 
 
 export function signUpProcess() {
-    createModal('Sign Up', getRegistrationForm())
+    createModal('Sign Up', getRegistrationForm());
         const signUpForm = document.getElementById('signUpForm');
         const usernameInp = signUpForm.querySelector('#username'),
             emailInp = signUpForm.querySelector('#email'),
@@ -28,11 +28,11 @@ export function signUpProcess() {
             button = signUpForm.querySelector('button');
 
             function buttonState() {
-                button.disabled = !checkButtonAble([username.value, email.value, password.value]);
+                button.disabled = !checkButtonAble([usernameInp.value, emailInp.value, passwordInp.value]);
             }
 
             usernameInp.addEventListener('input', buttonState)
-            emailInp.addEventListener('input', () => buttonState)
+            emailInp.addEventListener('input', buttonState)
             passwordInp.addEventListener('input', buttonState)
 
         signUpForm.addEventListener('submit', (e) => {
@@ -58,11 +58,32 @@ export function signUpProcess() {
                     // account creatic heto cankalia bacvi sign in-i modalken
                 
             })
-            
-            
-        
-            
-        })
+
+    })
+}
+
+
+export function signInProcess() {
+    createModal('Sign In', getSignInForm());
+    const signInForm = document.getElementById('signInForm');
+        const emailInp = signInForm.querySelector('#user-email'),
+            passwordInp = signInForm.querySelector('#user-password'),
+            button = signInForm.querySelector('button');
+
+    function buttonState() {
+        button.disabled = !checkButtonAble([emailInp.value, passwordInp.value]);
+    }
+
+    emailInp.addEventListener('input', buttonState);
+    passwordInp.addEventListener('input', buttonState);
+
+    signInForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // fetch to sign in 
+    })
+
+
 }
 
 

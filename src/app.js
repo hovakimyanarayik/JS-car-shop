@@ -2,7 +2,7 @@ import './sidebar';
 import './style.css';
 
 import Posts from './posts';
-import {renderUserPage, signUpProcess} from './auth';
+import {renderUserPage, signUpProcess, signInProcess} from './auth';
 // import { createModal, getRegistrationForm, checkButtonAble } from './utility';
 
 
@@ -39,6 +39,9 @@ sidebar.addEventListener('click', (e) => {
     
     if(e.target.dataset.action === 'sign-up') {
         signUpProcess();
+    }
+    if(e.target.dataset.action === 'sign-in') {
+        signInProcess();
     }
 })
 
