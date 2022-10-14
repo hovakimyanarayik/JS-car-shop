@@ -308,6 +308,33 @@ button {
 }
 
 
+.modal {
+  max-width: 500px;
+  width: 80%;
+  background-color: white;
+  margin: 120px auto;
+  padding: 15px 5px;
+  border-radius: 10px;
+}
+
+.modal h1 {
+  font-size: 25px;
+  text-align: center;
+}
+
+.success {
+  margin-top: 50px;
+  color: green;
+}
+
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+
+
 @media (min-width: 768px) {
   #header {
     left: 250px;
@@ -361,6 +388,16 @@ button {
 
     .result-heading {
       font-size: 20px;
+    }
+    .modal {
+      width: 50%;
+      margin: 150px auto;
+      padding: 25px 15px;
+    }
+
+    .modal h1 {
+      font-size: 20px;
+      font-weight: 200;
     }
     
 }
