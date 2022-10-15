@@ -7,13 +7,13 @@ export default class Posts{
 
     static async renderAllPosts() {
         const posts =  await Posts.getPosts();
-
+        console.log("POSTS" , posts);
         return postsToHTML(posts);
     }
 
     static async filterAndRenderByModel(model) {
         let posts =  await Posts.getPosts();
-        posts = posts.filter(post => post.model.toLowerCase() == model.toLowerCase());
+        posts = posts.filter(post => post.model.toLowerCase().includes(model.toLowerCase()));
         return postsToHTML(posts)
     }
     

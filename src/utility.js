@@ -68,10 +68,20 @@ export function createSuccessfulMessage(messege) {
     `
 }
 
-export function createFailedMessageFor2Second(el, message) {
+export function createFailedMessageFor3Second(el, message) {
     const errorMessage = `<p class="error">${message}</p>`;
-    el.insertAdjacentHTML('afterend', errorMessage)
+    el.disabled = true
+    el.insertAdjacentHTML('beforeBegin', errorMessage)
     setTimeout(() => {
-        el.nextSibling.remove()
-    }, 1500)
+        el.disabled = false;
+        el.previousSibling.remove()
+    }, 2500)
+}
+
+
+export function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
 }
