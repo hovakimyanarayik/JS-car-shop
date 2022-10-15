@@ -326,11 +326,12 @@ button {
 
 .modal {
   max-width: 500px;
-  width: 80%;
+  width: 85%;
   background-color: white;
-  margin: 120px auto;
+  margin: 120px auto !important;
   padding: 15px 5px;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .modal h1 {
@@ -366,6 +367,47 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.post-add-form div {
+  width: 100%;
+  padding: 5px;
+}
+
+.post-add-form input {
+  width: 100%;
+  height: 30px;
+  font-size: 17px;
+  padding-left: 4px;
+  border-radius: 4px;
+  border: 1px solid lightgrey;
+  border-bottom: 1px solid gray;
+}
+
+.postSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.post-add-form div:not(.postSection) {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-add-form button {
+  margin-top: 10px;
+  padding: 10px 33px;
+  font-size: 18px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(98, 185, 98);
+  color: white;
+}
+
+.post-add-form button:hover {
+  background-color: green;
+  cursor: pointer;
 }
 
 
@@ -444,9 +486,15 @@ button {
   .post img {
     width: 100%;
   }
+  .modal {
+    margin: 15px auto !important;
+  }
 
   .car-info {
     width: 100%;
+  }
+  .postSection {
+    flex-direction: column;
   }
 }
 
