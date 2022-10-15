@@ -8,7 +8,7 @@ import {
     getTokenFromLocalStorage, createFailedMessageFor3Second , 
     tokenToLocalStorage, createSuccessfulMessage , getSignInForm,
     scrollToTop, localIdToLocalStorage, getLocalIdFromLocalStorage,
-    clearLocalStorage
+    clearLocalStorage , getPostAddForm
 } from './utility'
 
 const sidebar = document.getElementById('sidedrawer'),
@@ -42,8 +42,9 @@ async function searchAndRenderByModel(e) {
 sidebar.addEventListener('click', (e) => {
     if(!e.target.dataset.action) return;
     
+    const actionType = e.target.dataset.action;
     // SIGN UP PROCESS
-    if(e.target.dataset.action === 'sign-up') {
+    if(actionType === 'sign-up') {
         createModal('Sign Up', getRegistrationForm());
         const signUpForm = document.getElementById('signUpForm');
         const usernameInp = signUpForm.querySelector('#username'),
@@ -94,7 +95,7 @@ sidebar.addEventListener('click', (e) => {
     }
 
     // SIGN IN PROCESS
-    if(e.target.dataset.action === 'sign-in') {
+    if(actionType === 'sign-in') {
 
         createModal('Sign In', getSignInForm());
 
@@ -115,7 +116,6 @@ sidebar.addEventListener('click', (e) => {
 
             signInWithEmailAndPassword(emailInp.value, passwordInp.value)
             .then(response => {
-                console.log(response);
                 if(response.error) {
                     if(response.error.message.includes('TOO_MANY_ATTEMPTS_TRY_LATER')) {
                         createFailedMessageFor3Second(button, 'Too many attempts... Try later');
@@ -142,9 +142,21 @@ sidebar.addEventListener('click', (e) => {
 
 
     // SIGN OUT
-    if(e.target.dataset.action == 'sign-out') {
+    if(actionType == 'sign-out') {
         clearLocalStorage();
         accountinfo.innerHTML = renderNoLoginedUserPage()
+    }
+
+
+    if(actionType == 'post-add') {
+        if(!getLocalIdFromLocalStorage()) {
+            // messege to login
+            return;
+        }
+        const localId = getLocalIdFromLocalStorage();
+        createModal('Add a car for sale', getPostAddForm());
+        
+        
     }
 })
 

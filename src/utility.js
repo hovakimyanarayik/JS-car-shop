@@ -31,16 +31,53 @@ export function getRegistrationForm() {
 
 export function getSignInForm() {
     return `
-        <form class="mui-form" id="signInForm">
-            <div class="mui-textfield mui-textfield--float-label">
-                <input type="email" id="user-email">
-                <label for="user-email">Email</label>
+        
+    `
+}
+
+
+export function getPostAddForm() {
+    return `
+        <form id="postAddForm" class="post-add-form">
+            <div>
+                <label for="carModel">Model</label>
+                <input type="text" id="carModel" class="carModel" required autofocus maxlength="20">
             </div>
-            <div class="mui-textfield mui-textfield--float-label">
-                <input type="password" id="user-password" minlength="6">
-                <label for="user-passsword">Password</label>
+            <div>
+                <div>
+                    <label for="carYear">Year</label>
+                    <input type="number" id="carYear" class="carYear" required maxlength="4" minlength="4" min="1950">
+                </div>
+                <div>
+                    <label for="carMilage">Milage</label>
+                    <input type="number" id="carMilage" class="carMilage" required maxlength="10">
+                </div>
             </div>
-            <button type="submit" class="mui-btn mui-btn--raised bg-green" disabled>Sign In</button>
+            <div>
+                <div>
+                    <label for="imgUrl">Image URL</label>
+                    <input type="text" id="imgUrl" class="imgUrl">
+                </div>
+                <div>
+                    <label for="imgFile">Image</label>
+                    <input type="file" id="imgFile" class="imgFile">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input type="number" id="phone" class="phone" required>
+                </div>
+                <div>
+                    <label for="carCity">City</label>
+                    <input type="text" id="carCity" class="carCity" required>
+                </div>
+            </div>
+            <div>
+                <label for="carPrice">Price</label>
+                <input type="number" id="carPrice" class="carPrice">
+            </div>
+            <button type="submit">Post</button>
         </form>
     `
 }
@@ -100,3 +137,4 @@ export function clearLocalStorage() {
     localStorage.removeItem('token');
     localStorage.removeItem('localId');
 }
+
