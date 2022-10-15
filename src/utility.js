@@ -94,3 +94,9 @@ export function localIdToLocalStorage(localId) {
 export function getLocalIdFromLocalStorage() {
     return localStorage.getItem('localId')
 }
+
+
+export function clearLocalStorage() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('localId');
+}

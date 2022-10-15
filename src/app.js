@@ -7,7 +7,8 @@ import {
     createModal, getRegistrationForm, checkButtonAble, 
     getTokenFromLocalStorage, createFailedMessageFor3Second , 
     tokenToLocalStorage, createSuccessfulMessage , getSignInForm,
-    scrollToTop, localIdToLocalStorage, getLocalIdFromLocalStorage
+    scrollToTop, localIdToLocalStorage, getLocalIdFromLocalStorage,
+    clearLocalStorage
 } from './utility'
 
 const sidebar = document.getElementById('sidedrawer'),
@@ -81,9 +82,7 @@ sidebar.addEventListener('click', (e) => {
             .then((response) => {
                 if(response == 'rejected') return;
                 createUserPage(usernameInp.value, emailInp.value, localStorage.getItem('localId'))
-                .then(() => {
-                    // fetchUserByEmail(emailInp.value)
-                    
+                .then(() => {                    
                     return renderUserPage(emailInp.value)
                 })
                 .then(response => {
@@ -140,6 +139,13 @@ sidebar.addEventListener('click', (e) => {
             })
         })
     }
+
+
+    // SIGN OUT
+    if(e.target.dataset.action == 'sign-out') {
+        clearLocalStorage();
+        accountinfo.innerHTML = renderNoLoginedUserPage()
+    }
 })
 
 searchForm.addEventListener('submit', searchAndRenderByModel)
@@ -155,7 +161,7 @@ window.addEventListener('DOMContentLoaded', () => {
     resultHeading.innerHTML = '';
     showPosts();
     accountinfo.innerHTML = renderNoLoginedUserPage();
-    localStorage.removeItem('token');
-    localStorage.removeItem('localId');
+    clearLocalStorage()
+    
 })
 

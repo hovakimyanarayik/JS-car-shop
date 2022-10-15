@@ -12,11 +12,7 @@ export function renderUserPage(email){
                     <button class="mui-btn bg-lightred" data-action="sign-out" data-localId="${user.localId}">Sign Out</button>
                 `
         } else {
-            return `
-                    <p class="action-handler">Sign up for post an add</p>
-                    <button class="mui-btn bg-green" data-action="sign-up">Sign Up</button>
-                    <p class="sign-in-btn" data-action="sign-in">Already have an account?</p>
-                `
+            return renderNoLoginedUserPage()
         }
     })
     
