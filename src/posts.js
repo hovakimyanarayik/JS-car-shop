@@ -9,23 +9,6 @@ export default class Posts{
         const posts =  await Posts.getPosts();
 
         return postsToHTML(posts);
-        // const html = posts.map(post => `
-        //     <div class="post">
-        //         <img src="${post.img || 'https://prestigemotorsport.com.au/wp-content/uploads/car_no_image_small.jpg'}" alt="image">
-        //         <div class="car-info">
-        //             <p class="model">${post.model}</p>
-        //             <div>
-        //                 <p class="price">$ ${post.price}</p>
-        //                 <p class="year">Year: ${post.year}</p>
-        //                 <p class="milage">Milage: ${post.milage} Mile</p>
-        //                 <p class="city">City: ${post.city}</p>
-        //                 <button class="mui-btn bg-green"><i class="fas fa-phone"></i> ${post.tel}</button>
-                        
-        //             </div>
-        //         </div>
-        //     </div>
-        // `)
-        // return html;
     }
 
     static async filterAndRenderByModel(model) {

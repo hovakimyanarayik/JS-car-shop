@@ -333,6 +333,9 @@ button {
   text-align: center;
 }
 
+.post-add-btn {
+  font-size: 35px;
+}
 
 
 @media (min-width: 768px) {

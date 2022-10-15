@@ -1,4 +1,8 @@
-import { createModal, getRegistrationForm, getSignInForm, checkButtonAble } from './utility';
+import { 
+    createModal, getRegistrationForm, getSignInForm, 
+    checkButtonAble, tokenToLocalStorage, createSuccessfulMessage, 
+    createFailedMessageFor2Second 
+} from './utility';
 
 const apiKey = 'AIzaSyDnAYR2omdMpoeeuv2LuoFHoAreSoLA6kA';
 
@@ -52,8 +56,19 @@ export function signUpProcess() {
                 })
                 .then(response => response.json())
                 .then(response => {
+                    if(response.error) {
+                        if(response.error.message == 'EMAIL_EXISTS') {
+                            createFailedMessageFor2Second(passwordInp, 'Email is already registered');
+                            emailInp.value = '';
+                            passwordInp.value = '';
+                            return;
+                        }
+                        createFailedMessageFor2Second(passwordInp, 'Something gone wrong... Try again');
+                        passwordInp.value = '';
+                        return;
+                    }
                     localStorage.setItem("localId", response.localId);
-                    signUpForm.innerHTML = createSuccessfulSignUpMessage()
+                    signUpForm.innerHTML = createSuccessfulMessage('Account Created Successful')
                     
                     // account creatic heto cankalia bacvi sign in-i modalken
                 
@@ -63,7 +78,7 @@ export function signUpProcess() {
 }
 
 
-export function signInProcess() {
+export async function signInProcess() {
     createModal('Sign In', getSignInForm());
     const signInForm = document.getElementById('signInForm');
         const emailInp = signInForm.querySelector('#user-email'),
@@ -77,21 +92,63 @@ export function signInProcess() {
     emailInp.addEventListener('input', buttonState);
     passwordInp.addEventListener('input', buttonState);
 
-    signInForm.addEventListener('submit', (e) => {
+    await signInForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        
+        const loginForm = {
+            email: emailInp.value,
+            password: passwordInp.value,
+            returnSecureToken: true
+        }
 
-        // fetch to sign in 
+        fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(loginForm)
+            })
+            .then(response => response.json())
+            .then(response => {
+                if(response.error) {
+                    if(response.error.message.includes('TOO_MANY_ATTEMPTS_TRY_LATER')) {
+                        createFailedMessageFor2Second(passwordInp, 'Too many attempts... Try later');
+                        passwordInp.value = '';
+                        return
+                    }
+                    createFailedMessageFor2Second(passwordInp, 'Wrong email or password. Try again...');
+                    passwordInp.value = '';
+                    return;
+                }
+                tokenToLocalStorage(response.idToken);
+                signInForm.innerHTML = createSuccessfulMessage('You have successfully logged in');
+
+        })
+        
+    })
+    return new Promise((resolve, reject) => {
+        resolve(localStorage.getItem('token'))
     })
 
 
 }
 
 
-function createSuccessfulSignUpMessage() {
-    return `
-        <h1 class="success">Account Created Successful</h1>
-    `
-}
+// function createSuccessfulMessage(messege) {
+//     return `
+//         <h1 class="success">${messege}</h1>
+//     `
+// }
+
+// function createFailedMessageFor2Second(el, message) {
+//     const errorMessage = `<p class="error">${message}</p>`;
+//     el.insertAdjacentHTML('afterend', errorMessage)
+//     setTimeout(() => {
+//         el.nextSibling.remove()
+//     }, 1500)
+// }
+
+
 
 
 

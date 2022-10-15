@@ -4,7 +4,7 @@ import './style.css';
 import Posts from './posts';
 import {renderUserPage, signUpProcess, signInProcess} from './auth';
 // import { createModal, getRegistrationForm, checkButtonAble } from './utility';
-
+import { getTokenFromLocalStorage } from './utility'
 
 const sidebar = document.getElementById('sidedrawer'),
     accountinfo = sidebar.querySelector('#sign-div'),
@@ -41,7 +41,11 @@ sidebar.addEventListener('click', (e) => {
         signUpProcess();
     }
     if(e.target.dataset.action === 'sign-in') {
-        signInProcess();
+        signInProcess()
+        .then((response) => {
+            console.log(response);
+        })
+        accountinfo.innerHTML = renderUserPage(getTokenFromLocalStorage())
     }
 })
 
@@ -56,6 +60,6 @@ headerLogo.addEventListener('click', () => {
 window.addEventListener('DOMContentLoaded', () => {
     resultHeading.innerHTML = '';
     showPosts();
-    accountinfo.innerHTML = renderUserPage(localStorage.getItem('token'))
+    accountinfo.innerHTML = renderUserPage()
 })
 

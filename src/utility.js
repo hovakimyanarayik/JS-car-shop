@@ -4,6 +4,7 @@ export function createModal(title, content) {
     modalEL.innerHTML = `<h1>${title}</h1>`;
     modalEL.innerHTML += content;
     mui.overlay('on', modalEL)
+    document.body.className = '';
 }
 
 
@@ -11,7 +12,7 @@ export function getRegistrationForm() {
     return `
         <form class="mui-form" id="signUpForm">
             <div class="mui-textfield mui-textfield--float-label">
-                <input type="text" id="username">
+                <input type="text" id="username" minlength="3">
                 <label for="username">Username</label>
             </div>
             <div class="mui-textfield mui-textfield--float-label">
@@ -48,4 +49,29 @@ export function getSignInForm() {
 
 export function checkButtonAble(arr) {
     return arr.every(item => !!item)
+}
+
+
+export function tokenToLocalStorage(token) {
+    localStorage.setItem('token', token)
+}
+
+export function getTokenFromLocalStorage() {
+    return localStorage.getItem('token')
+}
+
+
+
+export function createSuccessfulMessage(messege) {
+    return `
+        <h1 class="success">${messege}</h1>
+    `
+}
+
+export function createFailedMessageFor2Second(el, message) {
+    const errorMessage = `<p class="error">${message}</p>`;
+    el.insertAdjacentHTML('afterend', errorMessage)
+    setTimeout(() => {
+        el.nextSibling.remove()
+    }, 1500)
 }
