@@ -85,3 +85,12 @@ export function scrollToTop() {
         behavior: "smooth"
     })
 }
+
+export function localIdToLocalStorage(localId) {
+    localStorage.setItem('localId', localId);
+}
+
+
+export function getLocalIdFromLocalStorage() {
+    return localStorage.getItem('localId')
+}

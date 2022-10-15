@@ -2,12 +2,12 @@ import './sidebar';
 import './style.css';
 
 import Posts from './posts';
-import {renderUserPage, SignUpWithEmailAndPassword, signInWithEmailAndPassword, createUserPage} from './auth';
+import {renderUserPage, SignUpWithEmailAndPassword, signInWithEmailAndPassword, createUserPage, renderNoLoginedUserPage} from './auth';
 import {
     createModal, getRegistrationForm, checkButtonAble, 
     getTokenFromLocalStorage, createFailedMessageFor3Second , 
     tokenToLocalStorage, createSuccessfulMessage , getSignInForm,
-    scrollToTop
+    scrollToTop, localIdToLocalStorage, getLocalIdFromLocalStorage
 } from './utility'
 
 const sidebar = document.getElementById('sidedrawer'),
@@ -68,18 +68,28 @@ sidebar.addEventListener('click', (e) => {
                         createFailedMessageFor3Second(button, 'Email is already registered');
                         emailInp.value = '';
                         passwordInp.value = '';
-                        return;
+                        return 'rejected';
                     }
                     createFailedMessageFor3Second(button, 'Something gone wrong... Try again');
                     passwordInp.value = '';
-                    return;
+                    return 'rejected';
                 }
                 tokenToLocalStorage(response.idToken);
+                localIdToLocalStorage(response.localId);
                 signUpForm.innerHTML = createSuccessfulMessage('Account Created Successful')
             })
-            .then(() => {
-                createUserPage(usernameInp.value, emailInp.value);
-                // accountinfo.innerHTML = renderUserPage(getTokenFromLocalStorage())
+            .then((response) => {
+                if(response == 'rejected') return;
+                createUserPage(usernameInp.value, emailInp.value, localStorage.getItem('localId'))
+                .then(() => {
+                    // fetchUserByEmail(emailInp.value)
+                    
+                    return renderUserPage(emailInp.value)
+                })
+                .then(response => {
+                    accountinfo.innerHTML = response;
+                })
+                
             })
         })
     }
@@ -118,6 +128,7 @@ sidebar.addEventListener('click', (e) => {
                     return;
                 }
                 tokenToLocalStorage(response.idToken);
+                localIdToLocalStorage(response.localId);
                 signInForm.innerHTML = createSuccessfulMessage('You have successfully logged in');
             })
             .then(() => {
@@ -139,7 +150,8 @@ headerLogo.addEventListener('click', () => {
 window.addEventListener('DOMContentLoaded', () => {
     resultHeading.innerHTML = '';
     showPosts();
-    accountinfo.innerHTML = renderUserPage();
+    accountinfo.innerHTML = renderNoLoginedUserPage();
     localStorage.removeItem('token');
+    localStorage.removeItem('localId');
 })
 
