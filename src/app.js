@@ -121,18 +121,22 @@ sidebar.addEventListener('click', (e) => {
                     if(response.error.message.includes('TOO_MANY_ATTEMPTS_TRY_LATER')) {
                         createFailedMessageFor3Second(button, 'Too many attempts... Try later');
                         passwordInp.value = '';
-                        return
+                        return 'rejected';
                     }
                     createFailedMessageFor3Second(button, 'Wrong email or password. Try again...');
                     passwordInp.value = '';
-                    return;
+                    return 'rejected';
                 }
                 tokenToLocalStorage(response.idToken);
                 localIdToLocalStorage(response.localId);
                 signInForm.innerHTML = createSuccessfulMessage('You have successfully logged in');
             })
-            .then(() => {
-                accountinfo.innerHTML = renderUserPage(getTokenFromLocalStorage())
+            .then((response) => {
+                if(response == 'rejected') return;
+                return renderUserPage(emailInp.value);
+            })
+            .then(response => {
+                accountinfo.innerHTML = response;
             })
         })
     }
