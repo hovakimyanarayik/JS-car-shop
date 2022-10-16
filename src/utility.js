@@ -51,37 +51,37 @@ export function getPostAddForm() {
         <form id="postAddForm" class="post-add-form">
             <div>
                 <label for="carModel"> <i class="fas fa-car"></i> Model</label>
-                <input type="text" id="carModel" class="carModel" required autofocus maxlength="20">
+                <input type="text" name="carModel" class="carModel" required maxlength="20">
             </div>
             <div class="postSection">
                 <div>
                     <label for="carYear"> Year</label>
-                    <input type="number" id="carYear" class="carYear" required maxlength="4" minlength="4" min="1990">
+                    <input type="number" name="carYear" class="carYear" required maxlength="4" minlength="4" min="1990">
                 </div>
                 <div>
                     <label for="carMilage">Milage</label>
-                    <input type="number" id="carMilage" class="carMilage" required maxlength="10">
+                    <input type="number" name="carMilage" class="carMilage" required maxlength="10">
                 </div>
             </div>
             <div class="postSection"> 
                 <div>
                     <label for="imgUrl"><i class="fas fa-camera"></i> Image URL</label>
-                    <input type="text" id="imgUrl" class="imgUrl">
+                    <input type="text" name="imgUrl" class="imgUrl">
                 </div>
             </div>
             <div class="postSection">
                 <div>
                     <label for="phone"> <i class="fas fa-phone"></i> Phone</label>
-                    <input type="number" id="phone" class="phone" required>
+                    <input type="number" name="phone" class="phone" required minlength="6">
                 </div>
                 <div>
                     <label for="carCity">City</label>
-                    <input type="text" id="carCity" class="carCity" required>
+                    <input type="text" name="carCity" class="carCity" required>
                 </div>
             </div>
             <div>
                 <label for="carPrice"> <i class="fas fa-dollar-sign"></i> Price</label>
-                <input type="number" id="carPrice" class="carPrice">
+                <input type="number" name="carPrice" class="carPrice">
             </div>
             <button type="submit">Post</button>
         </form>

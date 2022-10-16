@@ -382,6 +382,7 @@ button {
   border-radius: 4px;
   border: 1px solid lightgrey;
   border-bottom: 1px solid gray;
+  outline:  none;
 }
 
 .postSection {

@@ -148,13 +148,31 @@ sidebar.addEventListener('click', (e) => {
     }
 
 
+    // POST ADD
     if(actionType == 'post-add') {
         if(!getLocalIdFromLocalStorage()) {
-            // messege to login
+            createFailedMessageFor3Second(e.target, 'Please sign in to post an add');
             return;
         }
         const localId = getLocalIdFromLocalStorage();
         createModal('Add a car for sale', getPostAddForm());
+
+        const postForm = document.getElementById('postAddForm'),
+            postButton = postForm.querySelector('button');
+
+        postForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            Posts.createPost(
+                postForm.carModel.value, postForm.carYear.value, postForm.carMilage.value, 
+                postForm.imgUrl.value, postForm.phone.value, 
+                postForm.carCity.value, postForm.carPrice.value
+            )
+            .then(() => {
+                postForm.innerHTML = createSuccessfulMessage('Your ad has been successfully posted!');
+                showPosts();
+            })
+        })
         
         
     }

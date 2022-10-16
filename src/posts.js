@@ -16,6 +16,28 @@ export default class Posts{
         posts = posts.filter(post => post.model.toLowerCase().includes(model.toLowerCase()));
         return postsToHTML(posts)
     }
+
+    static createPost(carModel, carYear, carMilage, imgUrl, phone, carCity, carPrice) {
+        const post = {
+            model: carModel,
+            img: imgUrl,
+            price: carPrice,
+            milage: carMilage,
+            city: carCity,
+            tel: phone,
+            year: carYear,
+            owner: localStorage.getItem('localId'),
+        }
+
+        return  fetch(`https://carhouse-yerevan-default-rtdb.firebaseio.com/posts.json?auth=${localStorage.getItem('token')}`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(post)
+        })
+        .then(response => response.json())
+    }
     
 }
 
@@ -24,7 +46,7 @@ function toPostsArray(posts) {
         posts[post].id = post;
     }
 
-    return Object.values(posts);
+    return Object.values(posts).reverse();
 }
 
 function postsToHTML(posts) {
@@ -34,7 +56,7 @@ function postsToHTML(posts) {
                 <div class="car-info">
                     <p class="model">${post.model}</p>
                     <div>
-                        <p class="price">$ ${post.price}</p>
+                        <p class="price">$ ${post.price || 'Contractual'}</p>
                         <p class="year">Year: ${post.year}</p>
                         <p class="milage">Milage: ${post.milage} Mile</p>
                         <p class="city">City: ${post.city}</p>
@@ -43,5 +65,5 @@ function postsToHTML(posts) {
                     </div>
                 </div>
             </div>
-        `)
+        `).join('')
 }
