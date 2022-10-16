@@ -78,7 +78,7 @@ sidebar.addEventListener('click', (e) => {
                 }
                 tokenToLocalStorage(response.idToken);
                 localIdToLocalStorage(response.localId);
-                signUpForm.innerHTML = createSuccessfulMessage('Account Created Successful')
+                createModal('Sign Up', createSuccessfulMessage('Account Created Successful'), 'close')
             })
             .then((response) => {
                 if(response == 'rejected') return;
@@ -128,7 +128,7 @@ sidebar.addEventListener('click', (e) => {
                 }
                 tokenToLocalStorage(response.idToken);
                 localIdToLocalStorage(response.localId);
-                signInForm.innerHTML = createSuccessfulMessage('You have successfully logged in');
+                createModal('Sign In', createSuccessfulMessage('You have successfully logged in'), 'close')
             })
             .then((response) => {
                 if(response == 'rejected') return 'rejected';
@@ -161,26 +161,25 @@ sidebar.addEventListener('click', (e) => {
             return;
         }
         const localId = getLocalIdFromLocalStorage();
-        createModal('Add a car for sale', getPostAddForm());
+        createModal('Ad a car for sale', getPostAddForm());
 
-        const postForm = document.getElementById('postAddForm'),
-            postButton = postForm.querySelector('button');
-
+        const postForm = document.getElementById('postAddForm');
+            
         postForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
             Posts.createPost(
                 postForm.carModel.value, postForm.carYear.value, postForm.carMilage.value, 
                 postForm.imgUrl.value, postForm.phone.value, 
-                postForm.carCity.value, postForm.carPrice.value
+                postForm.carCity.value, postForm.carPrice.value, postForm.carDescription.value
             )
             .then(response => {
                 if(response.error) {
-                    postForm.innerHTML = errorMessage('You don"t have a token... Please try agein');
+                    createModal('Failed', errorMessage('You don"t have a token... Please try agein'), 'close')
                     accountinfo.innerHTML = renderNoLoginedUserPage();
                     return;
                 }
-                postForm.innerHTML = createSuccessfulMessage('Your ad has been successfully posted!');
+                createModal('Ad a car for sale', createSuccessfulMessage('Your ad has been successfully posted!'), 'close')
                 showPosts();
             })
         })

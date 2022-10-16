@@ -80,6 +80,10 @@ button {
   align-items: center;
 }
 
+#mui-overlay {
+  overflow: hidden;
+}
+
 .footer-contain {
   text-align: center;
 }
@@ -330,21 +334,46 @@ button {
   color: white;
   padding: 7px 20px;
   border-radius: 3px;
-  /* position: absolute;
-  bottom: 5px;
-  right: 5px; */
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: rgb(231, 78, 78);
 }
 
 
 .modal {
   max-width: 500px;
   width: 85%;
-  min-height: 400px;
+  min-height: 300px;
   background-color: white;
-  margin: 120px auto !important;
-  padding: 15px 5px;
+  margin: 90px auto !important;
+  padding: 35px 5px;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
+}
+
+.closeDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+}
+
+.closeBtn {
+  background-color: lightgray;
+  color: black;
+  padding: 7px 16px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  background-color: gray;
+  color: white;
 }
 
 .modal form {
@@ -509,7 +538,7 @@ button {
     width: 100%;
   }
   .modal {
-    margin: 70px auto !important;
+    margin: 40px auto !important;
   }
 
   .car-info {

@@ -1,10 +1,22 @@
-export function createModal(title, content) {
+export function createModal(title, content, close) {
     const modalEL = document.createElement('div');
     modalEL.classList.add('modal');
     modalEL.innerHTML = `<h1>${title}</h1>`;
     modalEL.innerHTML += content;
     mui.overlay('on', modalEL)
     document.body.className = '';
+    if(close) {
+        const closeBtn = document.createElement('button');
+        const closeDiv = document.createElement('div');
+        closeDiv.classList.add('closeDiv')
+        closeDiv.appendChild(closeBtn);
+        closeBtn.classList.add('closeBtn');
+        closeBtn.textContent = 'Close'
+        modalEL.appendChild(closeDiv);
+        closeBtn.addEventListener('click', () => {
+            mui.overlay('off', modalEL)
+        })
+    }
 }
 
 
@@ -82,6 +94,10 @@ export function getPostAddForm() {
             <div>
                 <label for="carPrice"> <i class="fas fa-dollar-sign"></i> Price</label>
                 <input type="number" name="carPrice" class="carPrice">
+            </div>
+            <div>
+                <label for="carDescription"> Description</label>
+                <textarea id="carDescription" name="carDescription" class="carDescription" rows="3"></textarea>
             </div>
             <button type="submit">Post</button>
         </form>

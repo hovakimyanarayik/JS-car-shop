@@ -17,7 +17,7 @@ export default class Posts{
         return postsToHTML(posts)
     }
 
-    static createPost(carModel, carYear, carMilage, imgUrl, phone, carCity, carPrice) {
+    static createPost(carModel, carYear, carMilage, imgUrl, phone, carCity, carPrice, carDescription) {
         const post = {
             model: carModel,
             img: imgUrl,
@@ -26,6 +26,7 @@ export default class Posts{
             city: carCity,
             tel: phone,
             year: carYear,
+            description: carDescription,
             owner: localStorage.getItem('localId'),
         }
 
@@ -73,6 +74,7 @@ function postsToHTML(posts, user) {
                         <p class="year">Year: ${post.year}</p>
                         <p class="milage">Milage: ${post.milage} Mile</p>
                         <p class="city">City: ${post.city}</p>
+                        <p>Description: ${post.description ? post.description : ''}</p>
                         ${user ? '' : `<button class="mui-btn bg-green"><i class="fas fa-phone"></i> ${post.tel}</button>`}
                     </div>
                     ${user ? `<button class="remove-btn" data-action="remove-ad" data-id="${post.id}">Remove</button>`: ''}
