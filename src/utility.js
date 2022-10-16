@@ -144,3 +144,8 @@ export function clearLocalStorage() {
     localStorage.removeItem('localId');
 }
 
+
+
+export function errorMessage(message) {
+    return `<h1 class="error">${message}</h1>`
+}

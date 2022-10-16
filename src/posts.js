@@ -39,6 +39,19 @@ export default class Posts{
         .then(response => response.json())
     }
     
+
+    static getUserPosts() {
+        if(!localStorage.getItem('localId')) return;
+
+        const localId = localStorage.getItem('localId');
+
+        return Posts.getPosts()
+        .then(response => {
+            let userPosts = response.filter(post => post.owner == localId);
+            return postsToHTML(userPosts, 'user')
+        })
+
+    }
 }
 
 function toPostsArray(posts) {
@@ -49,7 +62,7 @@ function toPostsArray(posts) {
     return Object.values(posts).reverse();
 }
 
-function postsToHTML(posts) {
+function postsToHTML(posts, user) {
     return posts.map(post => `
             <div class="post">
                 <img src="${post.img || 'https://prestigemotorsport.com.au/wp-content/uploads/car_no_image_small.jpg'}" alt="image">
@@ -60,9 +73,9 @@ function postsToHTML(posts) {
                         <p class="year">Year: ${post.year}</p>
                         <p class="milage">Milage: ${post.milage} Mile</p>
                         <p class="city">City: ${post.city}</p>
-                        <button class="mui-btn bg-green"><i class="fas fa-phone"></i> ${post.tel}</button>
-                        
+                        ${user ? '' : `<button class="mui-btn bg-green"><i class="fas fa-phone"></i> ${post.tel}</button>`}
                     </div>
+                    ${user ? `<button class="remove-btn" data-action="remove-ad" data-id="${post.id}">Remove</button>`: ''}
                 </div>
             </div>
         `).join('')

@@ -8,7 +8,7 @@ import {
     getTokenFromLocalStorage, createFailedMessageFor3Second , 
     tokenToLocalStorage, createSuccessfulMessage , getSignInForm,
     scrollToTop, localIdToLocalStorage, getLocalIdFromLocalStorage,
-    clearLocalStorage , getPostAddForm
+    clearLocalStorage , getPostAddForm, errorMessage
 } from './utility'
 
 const sidebar = document.getElementById('sidedrawer'),
@@ -131,10 +131,15 @@ sidebar.addEventListener('click', (e) => {
                 signInForm.innerHTML = createSuccessfulMessage('You have successfully logged in');
             })
             .then((response) => {
-                if(response == 'rejected') return;
+                if(response == 'rejected') return 'rejected';
+                
                 return renderUserPage(emailInp.value);
             })
             .then(response => {
+                if(response == 'rejected') {
+                    accountinfo.innerHTML = renderNoLoginedUserPage();
+                    return;
+                }
                 accountinfo.innerHTML = response;
             })
         })
@@ -152,6 +157,7 @@ sidebar.addEventListener('click', (e) => {
     if(actionType == 'post-add') {
         if(!getLocalIdFromLocalStorage()) {
             createFailedMessageFor3Second(e.target, 'Please sign in to post an add');
+            accountinfo.innerHTML = renderNoLoginedUserPage();
             return;
         }
         const localId = getLocalIdFromLocalStorage();
@@ -168,7 +174,12 @@ sidebar.addEventListener('click', (e) => {
                 postForm.imgUrl.value, postForm.phone.value, 
                 postForm.carCity.value, postForm.carPrice.value
             )
-            .then(() => {
+            .then(response => {
+                if(response.error) {
+                    postForm.innerHTML = errorMessage('You don"t have a token... Please try agein');
+                    accountinfo.innerHTML = renderNoLoginedUserPage();
+                    return;
+                }
                 postForm.innerHTML = createSuccessfulMessage('Your ad has been successfully posted!');
                 showPosts();
             })
@@ -176,6 +187,23 @@ sidebar.addEventListener('click', (e) => {
         
         
     }
+
+
+    // See user adds
+
+    if(actionType == 'user-ads') {
+        Posts.getUserPosts()
+        .then(response => {
+            if(!response) {
+                resultHeading.textContent = "You don't have posted ads yet.";
+                postsContain.innerHTML = '';
+                return
+            }
+            resultHeading.textContent = "Your ads"
+            postsContain.innerHTML = response;
+        })
+    }
+
 })
 
 searchForm.addEventListener('submit', searchAndRenderByModel)

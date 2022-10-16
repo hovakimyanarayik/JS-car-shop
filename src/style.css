@@ -286,6 +286,7 @@ button {
   /* background-color: rgb(245, 242, 239); */
   box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.29);
   margin-top: 20px;
+  position: relative;
 }
 
 .post img {
@@ -323,15 +324,31 @@ button {
   margin: 15px;
 }
 
+.remove-btn {
+  background-color: rgb(210, 96, 96);
+  border: none;
+  color: white;
+  padding: 7px 20px;
+  border-radius: 3px;
+  /* position: absolute;
+  bottom: 5px;
+  right: 5px; */
+}
+
 
 .modal {
   max-width: 500px;
   width: 85%;
+  min-height: 400px;
   background-color: white;
   margin: 120px auto !important;
   padding: 15px 5px;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.modal form {
+  width: 100%;
 }
 
 .modal h1 {
@@ -476,6 +493,10 @@ button {
       font-size: 20px;
       font-weight: 200;
     }
+    .modal form {
+      width: 100%;
+      margin-top: 60px;
+    }
     
 }
 
@@ -488,7 +509,7 @@ button {
     width: 100%;
   }
   .modal {
-    margin: 15px auto !important;
+    margin: 70px auto !important;
   }
 
   .car-info {
