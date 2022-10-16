@@ -189,18 +189,35 @@ sidebar.addEventListener('click', (e) => {
 
 
     // See user adds
-
     if(actionType == 'user-ads') {
         Posts.getUserPosts()
         .then(response => {
             if(!response) {
-                resultHeading.textContent = "You don't have posted ads yet.";
-                postsContain.innerHTML = '';
-                return
+                createModal("Notification", createSuccessfulMessage("You don't have an ad yet"), 'close')
+                return;
+            }
+            if(response == 'rejected') {
+                createModal('Error', errorMessage('You are sign outed'), 'close');
+                accountinfo.innerHTML = renderNoLoginedUserPage();
+                return;
             }
             resultHeading.textContent = "Your ads"
             postsContain.innerHTML = response;
+            postsContain.addEventListener('click', (e) => {
+                if(!e.target.dataset.action) return;
+                const removePostId = e.target.dataset.id;
+                Posts.removePostById(removePostId)
+                .then(response => {
+                    if( response == 'rejected') {
+                        createModal('Error', errorMessage('Please try later...'), 'close')
+                    }
+                    createModal('Message', createSuccessfulMessage('The statement was successfully deleted'), 'close');
+                    showPosts();
+                    resultHeading.textContent = '';
+                })
+            })
         })
+        
     }
 
 })

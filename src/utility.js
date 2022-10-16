@@ -127,6 +127,9 @@ export function createSuccessfulMessage(messege) {
     `
 }
 
+
+
+
 export function createFailedMessageFor3Second(el, message) {
     const errorMessage = `<p class="error">${message}</p>`;
     el.disabled = true

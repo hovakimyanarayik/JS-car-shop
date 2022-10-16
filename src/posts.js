@@ -7,7 +7,6 @@ export default class Posts{
 
     static async renderAllPosts() {
         const posts =  await Posts.getPosts();
-        console.log("POSTS" , posts);
         return postsToHTML(posts);
     }
 
@@ -42,20 +41,32 @@ export default class Posts{
     
 
     static getUserPosts() {
-        if(!localStorage.getItem('localId')) return;
+        if(!localStorage.getItem('localId')) return Promise.resolve('rejected')
 
         const localId = localStorage.getItem('localId');
 
         return Posts.getPosts()
         .then(response => {
+            if(!response) return
             let userPosts = response.filter(post => post.owner == localId);
             return postsToHTML(userPosts, 'user')
         })
 
     }
+
+    static removePostById(id) {
+        if(!localStorage.getItem('token')) return Promise.resolve('rejected');
+
+        return fetch(`https://carhouse-yerevan-default-rtdb.firebaseio.com/posts/${id}.json?auth=${localStorage.getItem('token')}`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+    }
 }
 
 function toPostsArray(posts) {
+    if(!posts) return;
+
     for(let post in posts) {
         posts[post].id = post;
     }
@@ -64,6 +75,8 @@ function toPostsArray(posts) {
 }
 
 function postsToHTML(posts, user) {
+    if(!posts) return '';
+
     return posts.map(post => `
             <div class="post">
                 <img src="${post.img || 'https://prestigemotorsport.com.au/wp-content/uploads/car_no_image_small.jpg'}" alt="image">
