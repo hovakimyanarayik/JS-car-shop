@@ -1,5 +1,6 @@
 import './sidebar';
 import './style.css';
+import './mui.js';
 
 import Posts from './posts';
 import {renderUserPage, SignUpWithEmailAndPassword, signInWithEmailAndPassword, createUserPage, renderNoLoginedUserPage} from './auth';
