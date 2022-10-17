@@ -235,33 +235,9 @@ button {
 /* content */
 
 
-.content-header {
-  margin: 85px auto 0;
-  width: 100%;
-  max-width: 1300px;
-  height: 25vh;
-  background-image: url(https://connect-assets.prosple.com/cdn/ff/_CGxeh6zNfu7pH5tdr0WJqdRpHOK_DOYxDRQvt3dUBg/1630574292/public/2021-09/Banner-Mercedez%20Benz%20India-1786x642-2021.jpg);
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  color: white;
-}
 
-.content-header h1 {
-  font-size: 20px;
-  padding-left: 5px;
-  font-weight: 100;
-}
 
-.content-header p {
-  font-size: 16px;
-  letter-spacing: 1px;
-  align-self: center;
-  text-align: center;
-}
+
 
 
 
@@ -488,6 +464,77 @@ button {
 }
 
 
+/* slider */
+.slider-contain {
+  width: 95%;
+  margin: 100px auto 30px;
+  max-width: 1300px;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider {
+  width: calc(3 * 100%);
+  height: 100%;
+  display: flex;
+  transition: 1s;
+}
+
+.slider-item {
+  width: 95%;
+  max-width: 1300px;
+  height: 100%;
+}
+
+
+
+.slider-item1 {
+  background-image: url(https://connect-assets.prosple.com/cdn/ff/_CGxeh6zNfu7pH5tdr0WJqdRpHOK_DOYxDRQvt3dUBg/1630574292/public/2021-09/Banner-Mercedez%20Benz%20India-1786x642-2021.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+.slider-item2 {
+  background-image: url(https://startuppakistan.com.pk/wp-content/uploads/2021/08/BMW-banner-image.jpg);
+  background-position: bottom;
+  background-size: cover;
+}
+
+.slider-item3 {
+  background-image: url(https://www.theindianwire.com/wp-content/uploads/2020/08/Revival-of-the-automobile-market.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+.content-header {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.content-header h1 {
+  font-size: 20px;
+  padding-left: 5px;
+  font-weight: 100;
+}
+
+.content-header p {
+  font-size: 16px;
+  letter-spacing: 1px;
+  align-self: center;
+  text-align: center;
+}
+
+
+
 @media (min-width: 768px) {
   #header {
     left: 250px;
@@ -568,6 +615,17 @@ button {
       font-weight: 300;
       letter-spacing: 1px;
     }
+
+    .slider-contain {
+      width: 90%;
+      height: 330px;
+    }
+
+    .slider-item {
+      width: 90%;
+    }
+
+    
     
 }
 

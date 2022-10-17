@@ -10,7 +10,7 @@ import {
     createFailedMessageFor3Second , 
     tokenToLocalStorage, createSuccessfulMessage , getSignInForm,
     scrollToTop, localIdToLocalStorage, getLocalIdFromLocalStorage,
-    clearLocalStorage , getPostAddForm, errorMessage
+    clearLocalStorage , getPostAddForm, errorMessage, sliderOn
 } from './utility'
 
 const sidebar = document.getElementById('sidedrawer'),
@@ -238,6 +238,6 @@ window.addEventListener('DOMContentLoaded', () => {
     showPosts();
     accountinfo.innerHTML = renderNoLoginedUserPage();
     clearLocalStorage()
-    
+    sliderOn()
 })
 

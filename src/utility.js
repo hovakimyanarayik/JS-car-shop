@@ -168,3 +168,30 @@ export function clearLocalStorage() {
 export function errorMessage(message) {
     return `<h1 class="error">${message}</h1>`
 }
+
+
+export function sliderOn() {
+    const slider = document.getElementById('slider');
+    const sliderContain = document.getElementById('slider-contain');
+    let id = 1;
+    const resizeObserver = new ResizeObserver((entries) => {
+        const width = entries[0].contentRect.width;
+        slider.style.width = width * 3;
+        
+        [...slider.children].forEach(item => {
+            item.style.width = sliderContain.offsetWidth;
+        })
+        slider.style.marginLeft = -((id - 1) * slider.offsetWidth / 3) + 'px';
+    })
+
+    resizeObserver.observe(sliderContain)
+    
+    setInterval(() => {
+        console.log(slider.offsetWidth);
+        if(id == 3 ) {
+            id = 0
+        }
+        slider.style.marginLeft = -(id * slider.offsetWidth / 3) + 'px';
+        id++;
+    }, 8000)
+}
