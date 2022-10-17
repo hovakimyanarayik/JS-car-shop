@@ -1,12 +1,13 @@
 import './sidebar';
 import './style.css';
-import {mui} from './mui.js';
+import './mui.min.js';
+import './mui.min.css';
 
 import Posts from './posts';
 import {renderUserPage, SignUpWithEmailAndPassword, signInWithEmailAndPassword, createUserPage, renderNoLoginedUserPage} from './auth';
 import {
     createModal, getRegistrationForm, checkButtonAble, 
-    getTokenFromLocalStorage, createFailedMessageFor3Second , 
+    createFailedMessageFor3Second , 
     tokenToLocalStorage, createSuccessfulMessage , getSignInForm,
     scrollToTop, localIdToLocalStorage, getLocalIdFromLocalStorage,
     clearLocalStorage , getPostAddForm, errorMessage

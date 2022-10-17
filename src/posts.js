@@ -87,7 +87,7 @@ function postsToHTML(posts, user) {
                         <p class="year">Year: ${post.year}</p>
                         <p class="milage">Milage: ${post.milage} Mile</p>
                         <p class="city">City: ${post.city}</p>
-                        <p>Description: ${post.description ? post.description : ''}</p>
+                        <p>Descriptions: ${post.description ? post.description : ''}</p>
                         ${user ? '' : `<button class="mui-btn bg-green"><i class="fas fa-phone"></i> ${post.tel}</button>`}
                     </div>
                     ${user ? `<button class="remove-btn" data-action="remove-ad" data-id="${post.id}">Remove</button>`: ''}
