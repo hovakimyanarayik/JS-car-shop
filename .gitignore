@@ -69,7 +69,7 @@ node_modules/
 
 
 #public directory
-.public
+public
 
-.node_modules
+node_modules
 
