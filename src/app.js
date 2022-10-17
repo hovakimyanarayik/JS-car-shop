@@ -21,14 +21,14 @@ const sidebar = document.getElementById('sidedrawer'),
     headerLogo = document.getElementById('header-logo');
 
 
-
+// render all posts to post container
 async function showPosts(){
     postsContain.innerHTML = await Posts.renderAllPosts();
 }
 
 
 
-
+// listener to sidebar
 sidebar.addEventListener('click', (e) => {
     if(!e.target.dataset.action) return;
     
@@ -212,6 +212,8 @@ sidebar.addEventListener('click', (e) => {
 
 })
 
+
+// search by model
 async function searchAndRenderByModel(e) {
     e.preventDefault();
     
@@ -227,18 +229,20 @@ async function searchAndRenderByModel(e) {
 
 searchForm.addEventListener('submit', searchAndRenderByModel)
 
-
+// fixed header logo listener onclick scroll to top and render home page
 headerLogo.addEventListener('click', () => {
     resultHeading.innerHTML = '';
     showPosts()
     scrollToY(0)
 })
 
+
+// on DOMContentLoaded render home page
 window.addEventListener('DOMContentLoaded', () => {
     resultHeading.innerHTML = '';
     showPosts();
     accountinfo.innerHTML = renderNoLoginedUserPage();
     clearLocalStorage()
-    sliderOn()
+    sliderOn();
 })
 

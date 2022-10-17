@@ -1,3 +1,4 @@
+// creats modal with title, content, and if close attribute in - with close button
 export function createModal(title, content, close) {
     const modalEL = document.createElement('div');
     modalEL.classList.add('modal');
@@ -19,7 +20,7 @@ export function createModal(title, content, close) {
     }
 }
 
-
+// creats registration form html    
 export function getRegistrationForm() {
     return `
         <form class="mui-form" id="signUpForm">
@@ -40,7 +41,7 @@ export function getRegistrationForm() {
     `
 }
 
-
+// creats sign in form html
 export function getSignInForm() {
     return `
         <form class="mui-form" id="signInForm">
@@ -57,7 +58,7 @@ export function getSignInForm() {
     `
 }
 
-
+// creats post add form html
 export function getPostAddForm() {
     return `
         <form id="postAddForm" class="post-add-form">
@@ -105,22 +106,23 @@ export function getPostAddForm() {
 }
 
 
-
+// checks state
 export function checkButtonAble(arr) {
     return arr.every(item => !!item)
 }
 
-
+// add's token to local storage
 export function tokenToLocalStorage(token) {
     localStorage.setItem('token', token)
 }
 
+// retrunrs token from local storage
 export function getTokenFromLocalStorage() {
     return localStorage.getItem('token')
 }
 
 
-
+// creats sucsessful message
 export function createSuccessfulMessage(messege) {
     return `
         <h1 class="success">${messege}</h1>
@@ -129,7 +131,7 @@ export function createSuccessfulMessage(messege) {
 
 
 
-
+// creats fail message for 3 seconds and remove it
 export function createFailedMessageFor3Second(el, message) {
     const errorMessage = `<p class="error">${message}</p>`;
     el.disabled = true
@@ -140,36 +142,37 @@ export function createFailedMessageFor3Second(el, message) {
     }, 2500)
 }
 
-
-export function scrollToY(coord) {
+// scrolls window to argument given position
+export function scrollToY(coord = 0) {
     window.scrollTo({
         top: coord,
         behavior: "smooth"
     })
 }
 
+// sets licalId to local storage
 export function localIdToLocalStorage(localId) {
     localStorage.setItem('localId', localId);
 }
 
-
+// returns localId from local storage
 export function getLocalIdFromLocalStorage() {
     return localStorage.getItem('localId')
 }
 
-
+// delets token and localId from local storage
 export function clearLocalStorage() {
     localStorage.removeItem('token');
     localStorage.removeItem('localId');
 }
 
 
-
+// returns an error message
 export function errorMessage(message) {
     return `<h1 class="error">${message}</h1>`
 }
 
-// slider
+// function to run a slider banner
 export function sliderOn() {
     const slider = document.getElementById('slider');
     const sliderContain = document.getElementById('slider-contain');
@@ -194,3 +197,4 @@ export function sliderOn() {
         id++;
     }, 8000)
 }
+
