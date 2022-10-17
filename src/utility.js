@@ -141,9 +141,9 @@ export function createFailedMessageFor3Second(el, message) {
 }
 
 
-export function scrollToTop() {
+export function scrollToY(coord) {
     window.scrollTo({
-        top: 0,
+        top: coord,
         behavior: "smooth"
     })
 }
@@ -169,7 +169,7 @@ export function errorMessage(message) {
     return `<h1 class="error">${message}</h1>`
 }
 
-
+// slider
 export function sliderOn() {
     const slider = document.getElementById('slider');
     const sliderContain = document.getElementById('slider-contain');
@@ -187,7 +187,6 @@ export function sliderOn() {
     resizeObserver.observe(sliderContain)
     
     setInterval(() => {
-        console.log(slider.offsetWidth);
         if(id == 3 ) {
             id = 0
         }

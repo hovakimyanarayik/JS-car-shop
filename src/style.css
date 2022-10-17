@@ -223,7 +223,7 @@ button {
 
 .bg-lightred {
   background-color: rgb(231, 88, 88) !important;
-  color: white;
+  color: white !important;
 }
 
 .sign-in-btn:hover {
@@ -297,6 +297,7 @@ button {
   box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.29);
   margin-top: 20px;
   position: relative;
+  background-color: rgb(249, 249, 242);
 }
 
 .post img {
@@ -403,7 +404,7 @@ button {
 }
 
 .post-add-btn {
-  font-size: 35px;
+  font-size: 35px !important;
 }
 
 .line {
@@ -472,6 +473,7 @@ button {
   height: 250px;
   overflow: hidden;
   position: relative;
+  border-radius: 5px;
 }
 
 .slider {
@@ -617,12 +619,12 @@ button {
     }
 
     .slider-contain {
-      width: 90%;
+      width: 100%;
       height: 330px;
     }
 
     .slider-item {
-      width: 90%;
+      width: 100%;
     }
 
     

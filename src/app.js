@@ -9,7 +9,7 @@ import {
     createModal, getRegistrationForm, checkButtonAble, 
     createFailedMessageFor3Second , 
     tokenToLocalStorage, createSuccessfulMessage , getSignInForm,
-    scrollToTop, localIdToLocalStorage, getLocalIdFromLocalStorage,
+    scrollToY, localIdToLocalStorage, getLocalIdFromLocalStorage,
     clearLocalStorage , getPostAddForm, errorMessage, sliderOn
 } from './utility'
 
@@ -25,18 +25,6 @@ const sidebar = document.getElementById('sidedrawer'),
 async function showPosts(){
     postsContain.innerHTML = await Posts.renderAllPosts();
 }
-
-async function searchAndRenderByModel(e) {
-    e.preventDefault();
-    const   searchInput = searchForm.querySelector('#search-input');
-    const model = searchInput.value;
-    if(!model) return;
-    postsContain.innerHTML = await Posts.filterAndRenderByModel(model);
-    resultHeading.textContent = postsContain.innerHTML ? `Search results for: ${model}` : `No results for: ${model}`;
-
-    searchInput.value = '';
-}
-
 
 
 
@@ -224,13 +212,26 @@ sidebar.addEventListener('click', (e) => {
 
 })
 
+async function searchAndRenderByModel(e) {
+    e.preventDefault();
+    
+    const   searchInput = searchForm.querySelector('#search-input');
+    const model = searchInput.value;
+    if(!model) return;
+    scrollToY(searchForm.offsetTop);
+    postsContain.innerHTML = await Posts.filterAndRenderByModel(model);
+    resultHeading.textContent = postsContain.innerHTML ? `Search results for: ${model}` : `No results for: ${model}`;
+
+    searchInput.value = '';
+}
+
 searchForm.addEventListener('submit', searchAndRenderByModel)
 
 
 headerLogo.addEventListener('click', () => {
     resultHeading.innerHTML = '';
     showPosts()
-    scrollToTop()
+    scrollToY(0)
 })
 
 window.addEventListener('DOMContentLoaded', () => {
