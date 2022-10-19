@@ -102,7 +102,20 @@ button {
 
 
 #mui-overlay {
-  overflow: hidden !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  max-width: 500px;
+  width: 85%;
+  min-height: 300px;
+  background-color: white;
+  padding: 35px 5px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
 }
 
 .footer-contain {
@@ -349,17 +362,6 @@ button {
 }
 
 
-.modal {
-  max-width: 500px;
-  width: 85%;
-  min-height: 300px;
-  background-color: white;
-  margin: 90px auto !important;
-  padding: 35px 5px;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-}
 
 .closeDiv {
   width: 100%;
@@ -593,7 +595,7 @@ button {
     }
     .modal {
       width: 50%;
-      margin: 150px auto;
+      /* margin: 150px auto; */
       padding: 25px 15px;
     }
 

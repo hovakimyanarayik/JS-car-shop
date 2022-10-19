@@ -193,6 +193,7 @@ sidebar.addEventListener('click', (e) => {
             }
             resultHeading.textContent = "Your ads"
             postsContain.innerHTML = response;
+            scrollToY(resultHeading.offsetTop - 100)
             postsContain.addEventListener('click', (e) => {
                 if(!e.target.dataset.action) return;
                 const removePostId = e.target.dataset.id;
@@ -220,7 +221,7 @@ async function searchAndRenderByModel(e) {
     const   searchInput = searchForm.querySelector('#search-input');
     const model = searchInput.value;
     if(!model) return;
-    scrollToY(searchForm.offsetTop);
+    scrollToY(searchForm.offsetTop - 100);
     postsContain.innerHTML = await Posts.filterAndRenderByModel(model);
     resultHeading.textContent = postsContain.innerHTML ? `Search results for: ${model}` : `No results for: ${model}`;
 
